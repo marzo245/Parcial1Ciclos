@@ -1,0 +1,33 @@
+package Monitoreo.MonitoreoStock.servicio;
+
+import Monitoreo.MonitoreoStock.AgenteAdvertencia.AgenteAdvertencia;
+import Monitoreo.MonitoreoStock.AgenteLog.AgenteLog;
+import Monitoreo.MonitoreoStock.producto.Producto;
+import Monitoreo.MonitoreoStock.repositorio.RepositorioProducto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ServicioProducto {
+    @Autowired
+    private RepositorioProducto repositorio;
+
+    @Autowired
+    private AgenteLog agenteLog;
+
+    @Autowired
+    private AgenteAdvertencia agenteAdvertencia;
+
+    public void agregarProducto(Producto producto) {
+        repositorio.agregarProducto(producto);
+    }
+
+    public void actualizarStock(String nombre, int cantidad) {
+        repositorio.actualizarProducto(nombre, cantidad);
+        Producto producto = repositorio.obtenerProducto(nombre);
+        if (producto != null) {
+            agenteLog.registrarCambioStock(producto);
+            agenteAdvertencia.alertarStockBajo(producto);
+        }
+    }
+}

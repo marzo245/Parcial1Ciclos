@@ -1,0 +1,30 @@
+
+package Monitoreo.MonitoreoStock.repositorio;
+
+import Monitoreo.MonitoreoStock.producto.Producto;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
+public class RepositorioProducto {
+    private Map<String, Producto> mapaProductos = new HashMap<>();
+
+    public void agregarProducto(Producto producto) {
+        mapaProductos.put(producto.getNombre(), producto);
+    }
+
+    public void actualizarProducto(String nombre, int cantidad) {
+        Producto producto = mapaProductos.get(nombre);
+        if (producto != null) {
+            producto.setCantidad(cantidad);
+        }else{
+            producto.setCantidad(cantidad);
+        }
+    }
+
+    public Producto obtenerProducto(String nombre) {
+        return mapaProductos.get(nombre);
+    }
+}
