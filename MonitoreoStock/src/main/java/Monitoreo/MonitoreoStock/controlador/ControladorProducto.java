@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import Monitoreo.MonitoreoStock.servicio.ServicioProducto;
+//import Monitoreo.MonitoreoStock.servicio.ServicioProducto;
 import Monitoreo.MonitoreoStock.producto.Producto;
 @RestController
 @RequestMapping("/productos")
 public class ControladorProducto {
     @Autowired
-    private ServicioProducto servicioProducto;
+//    private ServicioProducto servicioProducto;
 
     @PostMapping
     public ResponseEntity<Void> agregarProducto(@RequestBody Producto producto) {
-        servicioProducto.agregarProducto(producto);
+//        servicioProducto.agregarProducto(producto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PatchMapping("/{nombre}/stock")
     public ResponseEntity<Void> actualizarStock(@PathVariable String nombre, @RequestParam int cantidad) {
-        servicioProducto.actualizarStock(nombre, cantidad);
+ //       servicioProducto.actualizarStock(nombre, cantidad);
         return ResponseEntity.ok().build();
     }
 }
